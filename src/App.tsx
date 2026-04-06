@@ -172,6 +172,14 @@ function App() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <div className="grain pointer-events-none fixed inset-0 z-[60] opacity-[0.03]" />
+      <div
+        className="pointer-events-none fixed inset-0 z-0 transition-opacity duration-300"
+        style={{
+          opacity: 1,
+          background:
+            "radial-gradient(circle at 50% 46%, rgba(232, 98, 42, 0.42) 0%, rgba(224, 104, 36, 0.28) 16%, rgba(196, 75, 10, 0.16) 32%, rgba(196, 75, 10, 0.08) 46%, transparent 76%)",
+        }}
+      />
 
       <header className="fixed inset-x-0 top-0 z-50 border-b border-border bg-nav/88 backdrop-blur-xl">
         <div className="mx-auto flex h-[60px] max-w-[1600px] items-center justify-between px-6 md:px-10">
@@ -204,7 +212,7 @@ function App() {
         </div>
       </header>
 
-      <main>
+      <main className="relative z-10">
         <section id="hero" className="relative px-6 py-16 pt-28 md:px-10 md:py-20 md:pt-28">
           <div className="hero-circle hero-circle-1" />
           <div className="hero-circle hero-circle-2" />
@@ -220,7 +228,7 @@ function App() {
               onCtaClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
             />
 
-            <div className="mt-6 border border-border bg-surface px-8 py-8 md:px-10">
+            <div className="mt-6 border border-border bg-surface/86 px-8 py-8 backdrop-blur-md md:px-10">
               <p className="mb-8 font-mono text-[1rem] uppercase tracking-[0.16em] text-faint">
                 // Quick Profile
               </p>
@@ -303,7 +311,7 @@ function App() {
               {projects.map((project) => (
                 <article
                   key={project.name}
-                  className="group bg-surface p-10 transition hover:bg-background-alt"
+                  className="group bg-surface/84 p-10 backdrop-blur-md transition hover:bg-background-alt/92"
                 >
                   <p className="mb-5 font-mono text-[0.96rem] uppercase tracking-[0.16em] text-faint">
                     {project.id}
@@ -334,7 +342,7 @@ function App() {
 
             <div className="grid gap-px border border-border bg-border md:grid-cols-2 xl:grid-cols-3">
               {skillGroups.map((group) => (
-                <article key={group.title} className="bg-surface px-8 py-9">
+                <article key={group.title} className="bg-surface/84 px-8 py-9 backdrop-blur-md">
                   <p className="mb-5 font-mono text-[0.96rem] uppercase tracking-[0.16em] text-primary">
                     {group.title}
                   </p>
@@ -397,7 +405,7 @@ function App() {
                 {certifications.map((cert) => (
                   <article
                     key={cert.name}
-                    className="border border-border border-l-2 border-l-primary bg-surface px-6 py-5 transition hover:translate-x-1"
+                    className="border border-border border-l-2 border-l-primary bg-surface/86 px-6 py-5 backdrop-blur-md transition hover:translate-x-1"
                   >
                     <h3 className="text-[1.18rem] font-medium text-foreground">{cert.name}</h3>
                     <p className="mt-1 font-mono text-[0.92rem] uppercase tracking-[0.08em] text-faint">
@@ -410,7 +418,10 @@ function App() {
           </div>
         </section>
 
-        <section id="contact" className="bg-ink px-6 py-20 text-ink-foreground md:px-10 md:py-28">
+        <section
+          id="contact"
+          className="relative z-10 bg-ink px-6 py-20 text-ink-foreground md:px-10 md:py-28"
+        >
           <div className="mx-auto max-w-[1600px]">
             <div className="grid gap-16 lg:grid-cols-2 lg:items-center">
               <div>

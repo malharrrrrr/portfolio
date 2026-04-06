@@ -3,32 +3,32 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --background: #f5f0e8;
-  --background-alt: #ede7d9;
-  --surface: #faf7f2;
-  --foreground: #1a1612;
-  --card: #faf7f2;
+  --background: #fbf6ee;
+  --background-alt: #f4ecdd;
+  --surface: #fffdf8;
+  --foreground: #17130f;
+  --card: #fffdf8;
   --card-foreground: #1a1612;
-  --popover: #faf7f2;
+  --popover: #fffdf8;
   --popover-foreground: #1a1612;
-  --primary: #c44b0a;
+  --primary: #d85a14;
   --primary-foreground: #fff7f0;
-  --secondary: #ede7d9;
+  --secondary: #f4ecdd;
   --secondary-foreground: #1a1612;
-  --muted: #ede7d9;
-  --muted-foreground: #7a7060;
-  --accent: #ede0cc;
-  --accent-foreground: #6b4e2a;
-  --border: #d6cebc;
-  --input: #d6cebc;
-  --ring: #c44b0a;
-  --faint: #a89f90;
-  --tag: #ede0cc;
-  --tag-foreground: #6b4e2a;
+  --muted: #f6efe2;
+  --muted-foreground: #6f6456;
+  --accent: #f4e5d0;
+  --accent-foreground: #704d25;
+  --border: #dfd3c0;
+  --input: #dfd3c0;
+  --ring: #d85a14;
+  --faint: #9f917d;
+  --tag: #f3e4cf;
+  --tag-foreground: #744d20;
   --ink: #1a1612;
   --ink-foreground: #f0ead8;
   --ink-muted: rgba(240, 234, 216, 0.5);
-  --nav: 245 240 232;
+  --nav: 251 246 238;
   --radius: 0.2rem;
 }
 
