@@ -34,6 +34,26 @@ const experience = [
 const projects = [
   {
     id: "P - 01",
+    name: "Argos - Disaster Management Platform",
+    date: "2026",
+    points: [
+      "Developed a disaster management platform to enable real-time reporting and coordination during emergencies.",
+      "Implemented incident reporting, location tracking, and resource allocation features to improve response efficiency.",
+      "Explored offline-first capabilities using Service Workers and local storage for functionality during low connectivity scenarios.",
+    ],
+  },
+  {
+    id: "P - 02",
+    name: "Organchain - Blockchain-based Organ Donation System",
+    date: "2026",
+    points: [
+      "Designed a blockchain-powered platform to ensure secure, transparent, and tamper-proof organ donor records.",
+      "Used smart contract concepts to improve trust, traceability, and fairness in organ allocation workflows.",
+      "Explored decentralized identity and data integrity principles for handling sensitive healthcare information.",
+    ],
+  },
+  {
+    id: "P - 03",
     name: "Marathi Voice Cloning TTS Model",
     date: "July 2025",
     points: [
@@ -43,7 +63,7 @@ const projects = [
     ],
   },
   {
-    id: "P - 02",
+    id: "P - 04",
     name: "Smart Home Automation System",
     date: "April 2025",
     points: [
@@ -72,8 +92,12 @@ const skillGroups = [
     items: ["NumPy", "Pandas", "scikit-learn", "TensorFlow", "PyTorch"],
   },
   {
+    title: "Blockchain",
+    items: ["Solidity", "Ethereum", "Hardhat", "Ethers.js", "IPFS"],
+  },
+  {
     title: "Tools & OS",
-    items: ["Git", "Linux", "Shell Scripting", "Flask"],
+    items: ["Git", "Linux", "Shell Scripting", "Flask", "Service Workers", "Local Storage"],
   },
   {
     title: "Languages",
@@ -125,6 +149,17 @@ function SectionHeader({ number, title }: { number: string; title: string }) {
       <div className="h-px flex-1 bg-border" />
     </div>
   )
+}
+
+function getSkillCardClass(index: number, total: number) {
+  const isLast = index === total - 1
+  const hasSingleCardLastRow = total % 3 === 1
+
+  if (isLast && hasSingleCardLastRow) {
+    return "bg-surface/84 px-8 py-9 backdrop-blur-md xl:col-start-2"
+  }
+
+  return "bg-surface/84 px-8 py-9 backdrop-blur-md"
 }
 
 function App() {
@@ -252,7 +287,7 @@ function App() {
                 </div>
                 <div>
                   <p className="font-serif text-6xl leading-none font-light text-foreground">
-                    2<span className="text-primary">+</span>
+                    4<span className="text-primary">+</span>
                   </p>
                   <p className="mt-3 text-[1.12rem] text-muted-foreground">Projects</p>
                 </div>
@@ -341,8 +376,11 @@ function App() {
             <SectionHeader number="03" title="Skills" />
 
             <div className="grid gap-px border border-border bg-border md:grid-cols-2 xl:grid-cols-3">
-              {skillGroups.map((group) => (
-                <article key={group.title} className="bg-surface/84 px-8 py-9 backdrop-blur-md">
+              {skillGroups.map((group, index) => (
+                <article
+                  key={group.title}
+                  className={getSkillCardClass(index, skillGroups.length)}
+                >
                   <p className="mb-5 font-mono text-[0.96rem] uppercase tracking-[0.16em] text-primary">
                     {group.title}
                   </p>
