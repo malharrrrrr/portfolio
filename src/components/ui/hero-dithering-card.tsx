@@ -31,7 +31,7 @@ export function CTASection({
   return (
     <section className="flex w-full items-center justify-center py-12">
       <div
-        className="relative w-full"
+        className="relative w-full motion-reveal is-visible"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         onMouseMove={(event) => {
@@ -66,7 +66,7 @@ export function CTASection({
 
           <div className="relative z-10 mx-auto grid w-full max-w-full items-center gap-12 py-12 lg:grid-cols-[30%_70%] lg:gap-10">
             <div className="flex items-center justify-center">
-              <div className="flex h-64 w-64 items-center justify-center rounded-full bg-background/60 shadow-[0_30px_80px_-30px_rgba(196,75,10,0.5)] backdrop-blur-md md:h-72 md:w-72 lg:h-[22rem] lg:w-[22rem]">
+              <div className="hero-portrait flex h-64 w-64 items-center justify-center rounded-full bg-background/60 shadow-[0_30px_80px_-30px_rgba(196,75,10,0.5)] backdrop-blur-md md:h-72 md:w-72 lg:h-[22rem] lg:w-[22rem]">
                 <div className="relative h-[89%] w-[89%] overflow-hidden rounded-full bg-[radial-gradient(circle_at_30%_30%,rgba(232,98,42,0.24),transparent_45%),linear-gradient(180deg,rgba(255,255,255,0.62),rgba(255,255,255,0.08))] dark:bg-[radial-gradient(circle_at_30%_30%,rgba(232,98,42,0.22),transparent_45%),linear-gradient(180deg,rgba(255,255,255,0.1),rgba(255,255,255,0.02))]">
                   <img
                     src={headshotGimmick}
@@ -78,7 +78,7 @@ export function CTASection({
             </div>
 
             <div className="flex flex-col items-start text-left">
-              <div className="mb-8 inline-flex items-center gap-2 border border-primary/15 bg-primary/6 px-5 py-2.5 font-mono text-[1.04rem] uppercase tracking-[0.18em] text-primary backdrop-blur-sm">
+              <div className="mb-8 inline-flex items-center gap-2 border border-primary/15 bg-primary/6 px-5 py-2.5 font-mono text-[1.04rem] uppercase tracking-[0.18em] text-primary backdrop-blur-sm transition-transform duration-500 hover:-translate-y-0.5">
                 <span className="relative flex h-2 w-2">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75"></span>
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-primary"></span>
@@ -104,7 +104,7 @@ export function CTASection({
                 <button
                   type="button"
                   onClick={onCtaClick}
-                  className="group relative inline-flex h-14 items-center justify-center gap-3 overflow-hidden bg-primary px-9 font-mono text-[1rem] uppercase tracking-[0.1em] text-primary-foreground transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary/90 active:scale-95"
+                  className="group relative inline-flex h-14 items-center justify-center gap-3 overflow-hidden bg-primary px-9 font-mono text-[1rem] uppercase tracking-[0.1em] text-primary-foreground transition-all duration-500 hover:-translate-y-1 hover:bg-primary/90 hover:shadow-[0_18px_40px_-22px_rgba(216,90,20,0.8)] active:scale-95"
                 >
                   <span className="relative z-10">Get in Touch</span>
                   <ArrowRight className="relative z-10 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
@@ -115,7 +115,7 @@ export function CTASection({
                     href={secondaryHref}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex h-14 items-center justify-center gap-3 border border-border bg-background/55 px-9 font-mono text-[1rem] uppercase tracking-[0.1em] text-foreground transition hover:-translate-y-0.5 hover:border-primary hover:text-primary"
+                  className="inline-flex h-14 items-center justify-center gap-3 border border-border bg-background/55 px-9 font-mono text-[1rem] uppercase tracking-[0.1em] text-foreground transition duration-500 hover:-translate-y-1 hover:border-primary hover:text-primary"
                   >
                     {secondaryLabel}
                   </a>
