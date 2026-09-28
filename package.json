@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://malharrrrrr.github.io/portfolio",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
@@ -17,10 +18,11 @@
     "tailwind-merge": "^2.5.2"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^4.3.3",
     "@tailwindcss/vite": "^4.1.7",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.3",
+    "gh-pages": "^6.3.0",
     "tailwindcss": "^4.1.7",
     "typescript": "^5.6.3",
     "vite": "^5.4.10"
