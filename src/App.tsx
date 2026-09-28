@@ -1,4 +1,5 @@
 import {
+  X,
   Github,
   GraduationCap,
   Linkedin,
@@ -165,12 +166,23 @@ function getSkillCardClass(index: number, total: number) {
 function App() {
   const [theme, setTheme] = useState<"light" | "dark">("light")
   const [activeSection, setActiveSection] = useState("hero")
+  const [showThemeHint, setShowThemeHint] = useState(false)
 
   useEffect(() => {
     const savedTheme = window.localStorage.getItem("portfolio-theme")
     const nextTheme = savedTheme === "dark" ? "dark" : "light"
     setTheme(nextTheme)
     document.documentElement.classList.toggle("dark", nextTheme === "dark")
+  }, [])
+
+  useEffect(() => {
+    setShowThemeHint(true)
+
+    const timeout = window.setTimeout(() => {
+      setShowThemeHint(false)
+    }, 20000)
+
+    return () => window.clearTimeout(timeout)
   }, [])
 
   useEffect(() => {
@@ -189,6 +201,23 @@ function App() {
     )
 
     sections.forEach((section) => observer.observe(section))
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    const revealItems = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"))
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return
+          entry.target.classList.add("is-visible")
+          observer.unobserve(entry.target)
+        })
+      },
+      { threshold: 0.14, rootMargin: "0px 0px -8% 0px" },
+    )
+
+    revealItems.forEach((item) => observer.observe(item))
     return () => observer.disconnect()
   }, [])
 
@@ -242,7 +271,28 @@ function App() {
                 })}
               </ul>
             </nav>
-            <ThemeToggle theme={theme} onToggle={toggleTheme} />
+            <div className="relative">
+              {showThemeHint ? (
+                <div className="absolute right-0 top-[calc(100%+0.8rem)] z-[70] w-64 rounded-xl border border-border/90 bg-[rgba(24,21,16,0.96)] p-3.5 text-left text-white shadow-[0_22px_55px_-24px_rgba(0,0,0,0.6)] backdrop-blur-xl dark:bg-[rgba(24,21,16,0.96)]">
+                  <div className="absolute -top-1.5 right-4 h-3 w-3 rotate-45 border-l border-t border-border/90 bg-[rgba(24,21,16,0.96)]" />
+                  <button
+                    type="button"
+                    onClick={() => setShowThemeHint(false)}
+                    aria-label="Close theme hint"
+                    className="absolute right-2.5 top-2.5 inline-flex h-6 w-6 items-center justify-center rounded-full text-white/60 transition hover:bg-white/8 hover:text-white"
+                  >
+                    <X className="h-3.5 w-3.5" />
+                  </button>
+                  <p className="font-mono text-[0.72rem] uppercase tracking-[0.08em] text-primary-foreground/85">
+                    Recommended
+                  </p>
+                  <p className="mt-1.5 max-w-[15rem] text-[0.9rem] leading-6 text-white/88">
+                    Toggle dark mode for a better experience.
+                  </p>
+                </div>
+              ) : null}
+              <ThemeToggle theme={theme} onToggle={toggleTheme} />
+            </div>
           </div>
         </div>
       </header>
@@ -252,7 +302,7 @@ function App() {
           <div className="hero-circle hero-circle-1" />
           <div className="hero-circle hero-circle-2" />
 
-          <div className="mx-auto max-w-[1600px]">
+          <div className="mx-auto max-w-[1600px]" data-reveal>
             <CTASection
               badge="Mumbai, Maharashtra"
               metaLabel="Computer Engineer · AI / ML"
@@ -263,7 +313,7 @@ function App() {
               onCtaClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
             />
 
-            <div className="mt-6 border border-border bg-surface/86 px-8 py-8 backdrop-blur-md md:px-10">
+            <div className="mt-6 border border-border bg-surface/86 px-8 py-8 backdrop-blur-md motion-card md:px-10" data-reveal>
               <p className="mb-8 font-mono text-[1rem] uppercase tracking-[0.16em] text-faint">
                 // Quick Profile
               </p>
@@ -308,13 +358,14 @@ function App() {
         </section>
 
         <section id="experience" className="bg-background-alt px-6 py-20 md:px-10 md:py-28">
-          <div className="mx-auto max-w-[1600px]">
+          <div className="mx-auto max-w-[1600px]" data-reveal>
             <SectionHeader number="01" title="Experience" />
 
             {experience.map((item) => (
               <div
                 key={item.role}
-                className="grid gap-4 border-y border-border py-10 md:grid-cols-[200px_1fr] md:gap-12"
+                className="grid gap-4 border-y border-border py-10 motion-card md:grid-cols-[200px_1fr] md:gap-12"
+                data-reveal
               >
                 <div>
                   <p className="font-mono text-[1rem] uppercase tracking-[0.1em] text-primary">
@@ -339,14 +390,15 @@ function App() {
         </section>
 
         <section id="projects" className="px-6 py-20 md:px-10 md:py-28">
-          <div className="mx-auto max-w-[1600px]">
+          <div className="mx-auto max-w-[1600px]" data-reveal>
             <SectionHeader number="02" title="Projects" />
 
             <div className="grid gap-px border border-border bg-border md:grid-cols-2">
               {projects.map((project) => (
                 <article
                   key={project.name}
-                  className="group bg-surface/84 p-10 backdrop-blur-md transition hover:bg-background-alt/92"
+                  className="group bg-surface/84 p-10 backdrop-blur-md transition duration-500 hover:-translate-y-1 hover:bg-background-alt/92 motion-card"
+                  data-reveal
                 >
                   <p className="mb-5 font-mono text-[0.96rem] uppercase tracking-[0.16em] text-faint">
                     {project.id}
@@ -372,7 +424,7 @@ function App() {
         </section>
 
         <section id="skills" className="bg-background-alt px-6 py-20 md:px-10 md:py-28">
-          <div className="mx-auto max-w-[1600px]">
+          <div className="mx-auto max-w-[1600px]" data-reveal>
             <SectionHeader number="03" title="Skills" />
 
             <div className="grid gap-px border border-border bg-border md:grid-cols-2 xl:grid-cols-3">
@@ -380,6 +432,7 @@ function App() {
                 <article
                   key={group.title}
                   className={getSkillCardClass(index, skillGroups.length)}
+                  data-reveal
                 >
                   <p className="mb-5 font-mono text-[0.96rem] uppercase tracking-[0.16em] text-primary">
                     {group.title}
@@ -401,11 +454,11 @@ function App() {
         </section>
 
         <section id="education" className="px-6 py-20 md:px-10 md:py-28">
-          <div className="mx-auto max-w-[1600px]">
+          <div className="mx-auto max-w-[1600px]" data-reveal>
             <SectionHeader number="04" title="Education & Certifications" />
 
             <div className="grid gap-14 lg:grid-cols-2">
-              <article>
+              <article data-reveal>
                 <h3 className="font-serif text-5xl leading-tight font-light text-foreground md:text-[3rem]">
                   B.Tech in
                   <br />
@@ -439,11 +492,12 @@ function App() {
                 </div>
               </article>
 
-              <div className="space-y-5">
+              <div className="space-y-5" data-reveal>
                 {certifications.map((cert) => (
                   <article
                     key={cert.name}
                     className="border border-border border-l-2 border-l-primary bg-surface/86 px-6 py-5 backdrop-blur-md transition hover:translate-x-1"
+                    data-reveal
                   >
                     <h3 className="text-[1.18rem] font-medium text-foreground">{cert.name}</h3>
                     <p className="mt-1 font-mono text-[0.92rem] uppercase tracking-[0.08em] text-faint">
@@ -460,9 +514,9 @@ function App() {
           id="contact"
           className="relative z-10 bg-ink px-6 py-20 text-ink-foreground md:px-10 md:py-28"
         >
-          <div className="mx-auto max-w-[1600px]">
+          <div className="mx-auto max-w-[1600px]" data-reveal>
             <div className="grid gap-16 lg:grid-cols-2 lg:items-center">
-              <div>
+              <div data-reveal>
                 <h2 className="font-serif text-[clamp(3rem,7vw,5.5rem)] leading-[0.96] font-light tracking-[-0.03em]">
                   Let&apos;s
                   <br />
@@ -474,7 +528,7 @@ function App() {
                 </p>
               </div>
 
-              <div>
+              <div data-reveal>
                 <a
                   href="mailto:malhar.vikson@gmail.com"
                   className="block border-b border-white/20 pb-4 font-serif text-3xl font-light transition hover:border-primary hover:text-primary"
